@@ -8,7 +8,7 @@ import * as itemView from './views/itemView';
 import { DOMStrings } from './views/base';
 
 
-//! GLOBAL APP CONTROLLER
+// GLOBAL APP CONTROLLER
 
 const controllAddItem = () => {
     
@@ -81,7 +81,7 @@ const controllAddItem = () => {
         // 9) Render the updated percentages to the UI
         itemView.renderPercentage(data);
 
-        //TODO: 10) Update expenses percentages
+        // 10) Update expenses percentages
         data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
 
         //TODO: 11) Render the expenses percentages to the UI
