@@ -118,6 +118,12 @@ const controllDeleteItem = (e) => {
     // 8) Update percentages & render to the UI
     Item.updatePercentage();
     itemView.renderPercentage(data);
+
+    // 10) Update expenses percentages
+    data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
+
+    //TODO: 11) Render the expenses percentages to the UI
+
 };
 
 
