@@ -13,4 +13,8 @@ export default class Expenses {
 			this.percentage = -1;
 		}
 	}
+
+	getPercentage() {
+		return this.percentage;
+	}
 }
