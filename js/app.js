@@ -4,7 +4,7 @@ import * as Item from './models/Item';
 import { data } from './models/Item';
 import Income from './models/Income';
 import Expenses from './models/Expenses';
-import { persistData } from './models/Storage';
+import { persistData, readStorage } from './models/Storage';
 import * as itemView from './views/itemView';
 import { DOMStrings } from './views/base';
 
@@ -129,8 +129,14 @@ const controllDeleteItem = (e) => {
 };
 
 const loadItems = () => {
+    // Read from Local Storage
+    const item = readStorage()
 
-}
+    // TODO: Append the items to the data
+
+    // TODO: Render to the UI
+
+};
 
 
 // Set inital values
@@ -154,7 +160,7 @@ DOMStrings.container.addEventListener('click', (event) => {
     }
 });
 
-
+// Load items 
 window.addEventListener('load', loadItems());
 
 
