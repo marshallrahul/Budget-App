@@ -82,3 +82,10 @@ export const updatePercentage = () => {
 	data.percentage = (data.totals.exp / data.totals.inc) * 100;
 };
 
+export const calcPercentage = () => (data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc)));
+
+export const getPercentage = () => {
+	data.allItem.exp.map((el) => {
+		console.log(el.percentage);
+	});
+};

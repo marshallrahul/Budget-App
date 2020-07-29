@@ -12,12 +12,12 @@ import { DOMStrings } from './views/base';
 
 const controllAddItem = () => {
     
-    // 1) Get the input obj
+    // Get the input obj
     const input = Item.getInput();
     
     if (input.des !== '' && input.amount !== isNaN) {
 
-        // 2) Clear input field
+        // Clear input field
         Item.clearField();
         
         // Check amount is a number
@@ -28,7 +28,7 @@ const controllAddItem = () => {
             amount += input.amount;
         }
         
-        // 3) Create a instance
+        // Create a instance
         let obj;
 
         if (input.type === 'inc') {
@@ -38,7 +38,7 @@ const controllAddItem = () => {
                 numeral(amount).format('0,0.00'),
             );
 
-            // 4) Add the input to object
+            // Add the input to object
             Item.addInput(obj, 'inc');
 
         } else if (input.type === 'exp') {
@@ -48,15 +48,18 @@ const controllAddItem = () => {
                 numeral(amount).format('0,0.00'),
             );
 
-            // 4) Add the input to object
+            // Add the input to object
             Item.addInput(obj, 'exp');
         }
 
-        // 5) Update total, inc & exp budget
+        // Update total, inc & exp budget
         Item.updateBudget();
         Item.updateTotalBudget();
 
-        // 6) Render to the UI 
+        // Calculate percentages
+        Item.calcPercentage();
+
+        // Render to the UI 
         if (input.type === 'inc') {
             
             // Clear list item
@@ -70,60 +73,52 @@ const controllAddItem = () => {
             data.allItem.exp.forEach((el) => itemView.renderExp(el));
         }
 
-        // 7) Render the budget to the UI
+        // Render the budget to the UI
         itemView.renderTotalInc(data);
         itemView.renderTotalExp(data);
         itemView.renderTotalBudget(data);
 
-        // 8) Update percentages
+        // Update percentages
         Item.updatePercentage();
     
-        // 9) Render the updated percentages to the UI
+        // Render the updated percentages to the UI
         itemView.renderPercentage(data);
-
-        // 10) Update expenses percentages
-        data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
-
-        //TODO: 11) Render the expenses percentages to the UI
     };
 };
 
 
 const controllDeleteItem = (e) => {
     
-    // 1) Get the current id
+    // Get the current id
     const currentID = (e.target.parentNode.parentNode.parentNode.parentNode.id);
 
-    // 2) Get current type
+    // Get current type
     let currentType;
     const parent = e.target.parentNode.parentNode.closest('.income__list');
     
     currentType = parent ? 'inc' : 'exp';
 
-    // 3) Update the budget
+    // Update the budget
     Item.updateDtBudget(currentID, currentType);
     Item.updateDtTotalBudget(data);
     
-    // 4) Render the update budget to the UI
+    // Render the update budget to the UI
     itemView.renderIncUpdateBudget(data, 'inc');
     itemView.renderExpUpdateBudget(data, 'exp');
     itemView.renderTotalBudget(data);
     
-    // 5) Delete the item from data
+    // Delete the item from data
     Item.deleteItem(currentID, currentType);
 
-    // 6) Delete the item from UI
+    // Delete the item from UI
     itemView.deleteItem(currentID);   
 
-    // 8) Update percentages & render to the UI
+    // Update percentages & render to the UI
     Item.updatePercentage();
     itemView.renderPercentage(data);
 
-    // 10) Update expenses percentages
+    // Update expenses percentages
     data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
-
-    //TODO: 11) Render the expenses percentages to the UI
-
 };
 
 

@@ -26,7 +26,7 @@ export const renderExp = (obj) => {
             <div class="item__description">${obj.title}</div>
             <div class="right clearfix">
                 <div class="item__value">- ${obj.amount}</div>
-                <div class="item__percentage">21%</div>
+                <div class="item__percentage">${obj.percentage}%</div>
                 <div class="item__delete">
                     <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button>
                 </div>
