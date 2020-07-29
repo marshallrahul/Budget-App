@@ -4,14 +4,15 @@ import * as Item from './models/Item';
 import { data } from './models/Item';
 import Income from './models/Income';
 import Expenses from './models/Expenses';
-import { persistData, readStorage } from './models/Storage';
+import * as Storage from './models/Storage';
 import * as itemView from './views/itemView';
 import { DOMStrings } from './views/base';
 
 
 // GLOBAL APP CONTROLLER
 
-let datsSet = [];
+let dataSetInc = [];
+let dataSetExp = [];
 
 const controllAddItem = () => {
     
@@ -40,6 +41,10 @@ const controllAddItem = () => {
                 input.des, 
                 numeral(amount).format('0,0.00'),
             );
+            
+            // Store in Local Storage
+            dataSetInc.push(obj);
+            Storage.persistIncData(dataSetInc);
 
             // Add the input to object
             Item.addInput(obj, 'inc');
@@ -51,13 +56,13 @@ const controllAddItem = () => {
                 numeral(amount).format('0,0.00'),
             );
 
+            //! Store in Local Storage    
+            dataSetExp.push(obj);    
+            Storage.persistExpData(dataSetExp);
+
             // Add the input to object
             Item.addInput(obj, 'exp');
-        }
-
-        // Store in Local Storage    
-        datsSet.push(obj);    
-        persistData(datsSet);
+        };
 
         // Update total, inc & exp budget
         Item.updateBudget();
@@ -130,9 +135,12 @@ const controllDeleteItem = (e) => {
 
 const loadItems = () => {
     // Read from Local Storage
-    const item = readStorage()
+    const incItem = Storage.readIncStorage();
+    const expItem = Storage.readExpStorage();
 
     // TODO: Append the items to the data
+    // Item.addInput(incItem, 'inc');
+    // Item.addInput(expItem, 'exp');
 
     // TODO: Render to the UI
 
@@ -161,7 +169,7 @@ DOMStrings.container.addEventListener('click', (event) => {
 });
 
 // Load items 
-window.addEventListener('load', loadItems());
+// window.addEventListener('load', loadItems());
 
 
 //? Testing
