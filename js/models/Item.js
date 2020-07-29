@@ -86,6 +86,6 @@ export const calcPercentage = () => (data.allItem.exp.forEach((el) => el.calcPer
 
 export const getPercentage = () => {
 	data.allItem.exp.map((el) => {
-		console.log(el.percentage);
+		return el.percentage;
 	});
 };
