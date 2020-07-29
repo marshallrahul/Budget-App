@@ -4,11 +4,14 @@ import * as Item from './models/Item';
 import { data } from './models/Item';
 import Income from './models/Income';
 import Expenses from './models/Expenses';
+import { persistData } from './models/Storage';
 import * as itemView from './views/itemView';
 import { DOMStrings } from './views/base';
 
 
 // GLOBAL APP CONTROLLER
+
+let datsSet = [];
 
 const controllAddItem = () => {
     
@@ -51,6 +54,10 @@ const controllAddItem = () => {
             // Add the input to object
             Item.addInput(obj, 'exp');
         }
+
+        // Store in Local Storage    
+        datsSet.push(obj);    
+        persistData(datsSet);
 
         // Update total, inc & exp budget
         Item.updateBudget();
@@ -121,6 +128,10 @@ const controllDeleteItem = (e) => {
     data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
 };
 
+const loadItems = () => {
+
+}
+
 
 // Set inital values
 itemView.initValues(data);
@@ -143,6 +154,8 @@ DOMStrings.container.addEventListener('click', (event) => {
     }
 });
 
+
+window.addEventListener('load', loadItems());
 
 
 //? Testing
