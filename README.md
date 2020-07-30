@@ -1,3 +1,3 @@
 # Budget-App
-In order to use this application. You need to download this code. 
+In order to use this application you need to download this code. 
 Then dist -> index.html
