@@ -14,7 +14,7 @@ import { DOMStrings } from './views/base';
 let dataSetInc = [];
 let dataSetExp = [];
 
-const controllAddItem = () => {
+const controllAddItem = () => {   
     
     // Get the input obj
     const input = Item.getInput();
@@ -95,6 +95,9 @@ const controllAddItem = () => {
     };
 };
 
+// Read from Local Storage
+const incItem = Storage.readIncStorage();
+const expItem = Storage.readExpStorage();
 
 const controllDeleteItem = (e) => {
     
@@ -102,7 +105,7 @@ const controllDeleteItem = (e) => {
     const currentID = (e.target.parentNode.parentNode.parentNode.parentNode.id);
 
     // Get current type
-    let currentType;
+    let currentType, storageType;
     const parent = e.target.parentNode.parentNode.closest('.income__list');
     
     currentType = parent ? 'inc' : 'exp';
@@ -119,26 +122,22 @@ const controllDeleteItem = (e) => {
     // Delete the item from data
     Item.deleteItem(currentID, currentType);
 
+    // Delete the item from Local Storage
+    Storage.removeStorageItem(currentID, currentType);
+
     // Delete the item from UI
     itemView.deleteItem(currentID);   
 
     // Update percentages & render to the UI
     Item.updatePercentage();
     itemView.renderPercentage(data);
-
-    // Update expenses percentages
-    data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
 };
 
-
 const loadItems = () => {
-    // Read from Local Storage
-    const incItem = Storage.readIncStorage();
-    const expItem = Storage.readExpStorage();
-
+    
     // Append the items to the data
-    Storage.addInput(incItem, data, 'inc');
-    Storage.addInput(expItem, data, 'exp');
+    Storage.addItem(incItem, data, 'inc');
+    Storage.addItem(expItem, data, 'exp');
 
     // Update total, inc & exp budget
     Item.updateBudget();
@@ -184,7 +183,3 @@ DOMStrings.container.addEventListener('click', (event) => {
 
 // Load items 
 window.addEventListener('load', loadItems());
-
-
-//? Testing
-window.data = data;
