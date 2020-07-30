@@ -56,7 +56,7 @@ const controllAddItem = () => {
                 numeral(amount).format('0,0.00'),
             );
 
-            //! Store in Local Storage    
+            // Store in Local Storage    
             dataSetExp.push(obj);    
             Storage.persistExpData(dataSetExp);
 
@@ -67,9 +67,6 @@ const controllAddItem = () => {
         // Update total, inc & exp budget
         Item.updateBudget();
         Item.updateTotalBudget();
-
-        // Calculate percentages
-        Item.calcPercentage();
 
         // Render to the UI 
         if (input.type === 'inc') {
@@ -133,17 +130,34 @@ const controllDeleteItem = (e) => {
     data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
 };
 
+
 const loadItems = () => {
     // Read from Local Storage
     const incItem = Storage.readIncStorage();
     const expItem = Storage.readExpStorage();
 
-    // TODO: Append the items to the data
-    // Item.addInput(incItem, 'inc');
-    // Item.addInput(expItem, 'exp');
+    // Append the items to the data
+    Storage.addInput(incItem, data, 'inc');
+    Storage.addInput(expItem, data, 'exp');
 
-    // TODO: Render to the UI
+    // Update total, inc & exp budget
+    Item.updateBudget();
+    Item.updateTotalBudget();
 
+    // Render to the UI
+    data.allItem.inc.forEach((el) => itemView.renderInc(el))
+    data.allItem.exp.forEach((el) => itemView.renderExp(el))
+
+    // Render the budget to the UI
+    itemView.renderTotalInc(data);
+    itemView.renderTotalExp(data);
+    itemView.renderTotalBudget(data);
+    
+    // Update percentages
+    Item.updatePercentage();
+        
+    // Render the updated percentages to the UI
+    itemView.renderPercentage(data);
 };
 
 
@@ -169,7 +183,7 @@ DOMStrings.container.addEventListener('click', (event) => {
 });
 
 // Load items 
-// window.addEventListener('load', loadItems());
+window.addEventListener('load', loadItems());
 
 
 //? Testing
