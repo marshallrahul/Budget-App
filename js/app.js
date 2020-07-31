@@ -69,7 +69,7 @@ const controllAddItem = () => {
         Item.updateTotalBudget();
 
         //! Calculate expenses percentages
-        // data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
+        data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
 
         // Render to the UI 
         if (input.type === 'inc') {
