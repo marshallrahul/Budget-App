@@ -153,9 +153,6 @@ const loadItems = () => {
     Item.updateBudget();
     Item.updateTotalBudget();
 
-    //! Calculate expenses percentages
-    // data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
-
     // Render to the UI
     data.allItem.inc.forEach((el) => itemView.renderInc(el))
     data.allItem.exp.forEach((el) => itemView.renderExp(el))
