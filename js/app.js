@@ -54,6 +54,7 @@ const controllAddItem = () => {
                 uniqid(), 
                 input.des, 
                 numeral(amount).format('0,0.00'),
+                Item.calcPercentage(data.totals.inc, numeral(amount).format('0,0.00'))
             );
 
             // Store in Local Storage    
@@ -67,9 +68,6 @@ const controllAddItem = () => {
         // Update total, inc & exp budget
         Item.updateBudget();
         Item.updateTotalBudget();
-
-        //! Calculate expenses percentages
-        // data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
 
         // Render to the UI 
         if (input.type === 'inc') {
@@ -193,8 +191,3 @@ DOMStrings.container.addEventListener('click', (event) => {
 
 // Load items 
 window.addEventListener('load', loadItems());
-
-//? Testing
-window.dataSetExp = dataSetExp;
-window.dataSetInc = dataSetInc;
-window.data = data;

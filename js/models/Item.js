@@ -83,3 +83,14 @@ export const updatePercentage = () => {
 };
 
 export const emptyList = (lst) => (lst.forEach((el) => e.splice(0, e.length)));
+
+export const calcPercentage = (totalInc, amount) => {
+	let percentage;
+
+	if (totalInc > 0) {
+		percentage = Math.round((parseFloat(amount.replace(/,/g, '')) / totalInc) * 100);
+	} else {
+		percentage = -1;
+	}
+	return percentage;
+};

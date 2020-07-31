@@ -1,11 +1,12 @@
 export default class Expenses {
-	constructor(id, title, amount) {
+	constructor(id, title, amount, percentage) {
 		this.id = id;
 		this.title = title;
 		this.amount = amount;
-		this.percentage = -1;
+		this.percentage = percentage;
 	}
 
+	/*
 	calcPercentage(totalInc) {
 		if (totalInc > 0) {
 			this.percentage = Math.round((parseFloat(this.amount.replace(/,/g, '')) / totalInc) * 100);
@@ -17,4 +18,5 @@ export default class Expenses {
 	getPercentage() {
 		return this.percentage;
 	}
+	*/
 }
