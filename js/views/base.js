@@ -9,5 +9,5 @@ export const DOMStrings = {
 	expBudget: document.querySelector('.budget__expenses--value'),
 	container: document.querySelector('.container'),
 	budgetMonth: document.querySelector('.budget__title--month'),
-	budgetExpPercentage: document.querySelector('.budget__expenses--percentage')
+	budgetExpPercentage: document.querySelector('.budget__expenses--percentage'),
 };

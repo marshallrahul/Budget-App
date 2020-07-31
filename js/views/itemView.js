@@ -20,7 +20,7 @@ export const renderInc = (obj) => {
 	DOMStrings.incomeList.insertAdjacentHTML('beforeend', markup);
 };
 
-export const renderExp = (obj) => {
+export const renderExp = (obj, calc, total) => {
 	const markup = `
         <div class="item clearfix" id="${obj.id}">
             <div class="item__description">${obj.title}</div>

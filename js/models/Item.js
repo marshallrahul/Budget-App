@@ -82,7 +82,7 @@ export const updatePercentage = () => {
 	data.percentage = (data.totals.exp / data.totals.inc) * 100;
 };
 
-export const emptyList = (lst) => (lst.forEach((el) => e.splice(0, e.length)));
+export const emptyList = (lst) => lst.forEach((el) => e.splice(0, e.length));
 
 export const calcPercentage = (totalInc, amount) => {
 	let percentage;
@@ -93,4 +93,9 @@ export const calcPercentage = (totalInc, amount) => {
 		percentage = -1;
 	}
 	return percentage;
+};
+
+export const expPercentage = (data) => {
+	const amount = data.allItem.exp.map((el) => calcPercentage(data.totals.inc, el.amount));
+	amount.forEach((el, i) => (document.querySelectorAll('.item__percentage')[i].innerHTML = `${el}%`));
 };

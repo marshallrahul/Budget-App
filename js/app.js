@@ -54,7 +54,7 @@ const controllAddItem = () => {
                 uniqid(), 
                 input.des, 
                 numeral(amount).format('0,0.00'),
-                Item.calcPercentage(data.totals.inc, numeral(amount).format('0,0.00'))
+                //? Item.calcPercentage(data.totals.inc, numeral(amount).format('0,0.00'))
             );
 
             // Store in Local Storage    
@@ -63,7 +63,7 @@ const controllAddItem = () => {
 
             // Add the input to object
             Item.addInput(obj, 'exp');
-        };
+        };  
 
         // Update total, inc & exp budget
         Item.updateBudget();
@@ -93,6 +93,9 @@ const controllAddItem = () => {
     
         // Render the updated percentages to the UI
         itemView.renderPercentage(data);
+
+        // Calculate percentage and Render to the UI
+        Item.expPercentage(data);
     };
 };
 
@@ -129,6 +132,9 @@ const controllDeleteItem = (e) => {
     // Update percentages & render to the UI
     Item.updatePercentage();
     itemView.renderPercentage(data);
+
+    // Calculate percentage and Render to the UI
+    Item.expPercentage(data);
 };
 
 const loadItems = () => {

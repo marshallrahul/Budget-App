@@ -1,9 +1,9 @@
 export default class Expenses {
-	constructor(id, title, amount, percentage) {
+	constructor(id, title, amount) {
 		this.id = id;
 		this.title = title;
 		this.amount = amount;
-		this.percentage = percentage;
+		this.percentage = -1;
 	}
 
 	/*
