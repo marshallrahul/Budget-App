@@ -68,6 +68,9 @@ const controllAddItem = () => {
         Item.updateBudget();
         Item.updateTotalBudget();
 
+        //! Calculate expenses percentages
+        // data.allItem.exp.forEach((el) => el.calcPercentage(data.totals.inc));
+
         // Render to the UI 
         if (input.type === 'inc') {
             
@@ -95,9 +98,6 @@ const controllAddItem = () => {
     };
 };
 
-// Read from Local Storage
-const incItem = Storage.readIncStorage();
-const expItem = Storage.readExpStorage();
 
 const controllDeleteItem = (e) => {
     
@@ -133,8 +133,16 @@ const controllDeleteItem = (e) => {
     itemView.renderPercentage(data);
 };
 
+// Read from Local Storage
+const incItem = Storage.readIncStorage();
+const expItem = Storage.readExpStorage();
+
 const loadItems = () => {
-    
+
+    // Append the Storage items to the list
+    if (incItem) incItem.map((el) => dataSetInc.push(el));
+    if (expItem) expItem.map((el2) => dataSetExp.push(el2));
+
     // Append the items to the data
     Storage.addItem(incItem, data, 'inc');
     Storage.addItem(expItem, data, 'exp');
@@ -183,3 +191,7 @@ DOMStrings.container.addEventListener('click', (event) => {
 
 // Load items 
 window.addEventListener('load', loadItems());
+
+//? Testing
+window.dataSetInc = dataSetInc;
+window.data = data;
