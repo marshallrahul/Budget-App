@@ -165,6 +165,9 @@ const loadItems = () => {
     itemView.renderTotalInc(data);
     itemView.renderTotalExp(data);
     itemView.renderTotalBudget(data);
+
+    // Calculate percentage and Render to the UI
+    Item.expPercentage(data);
     
     // Update percentages
     Item.updatePercentage();
