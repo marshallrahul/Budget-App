@@ -82,7 +82,7 @@ export const updatePercentage = () => {
 	data.percentage = (data.totals.exp / data.totals.inc) * 100;
 };
 
-export const emptyList = (lst) => lst.forEach((el) => e.splice(0, e.length));
+export const emptyList = (lst) => lst.forEach((el) => el.splice(0, el.length));
 
 const calcPercentage = (totalInc, amount) => {
 	let percentage;

@@ -54,7 +54,6 @@ const controllAddItem = () => {
                 uniqid(), 
                 input.des, 
                 numeral(amount).format('0,0.00'),
-                //? Item.calcPercentage(data.totals.inc, numeral(amount).format('0,0.00'))
             );
 
             // Store in Local Storage    
