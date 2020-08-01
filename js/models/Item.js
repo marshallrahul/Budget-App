@@ -84,7 +84,7 @@ export const updatePercentage = () => {
 
 export const emptyList = (lst) => lst.forEach((el) => e.splice(0, e.length));
 
-export const calcPercentage = (totalInc, amount) => {
+const calcPercentage = (totalInc, amount) => {
 	let percentage;
 
 	if (totalInc > 0) {
